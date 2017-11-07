@@ -1,6 +1,4 @@
-# Parcial Objetos
- 
-## Presidentes argentinos
+# Presidentes argentinos
  
 *Se quiere analizar la imagen positiva de los diferentes presidentes que tuvo el país a lo largo de la historia.*
  
