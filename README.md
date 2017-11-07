@@ -11,15 +11,19 @@ La imagen positiva de cada presidente se calcula como la sumatoria del impacto q
 A su vez, la imagen positiva de cualquier presidente aumenta según el tiempo que pasó de su muerte, a razón de un 1% por año. (Para evitar suspicacias, sólo se analizan presidentes fallecidos)
  
 Se pide:
-1) Calcular la imagen positiva de un presidente.
-2) Encontrar el presidente con mayor imagen positiva de la historia del país.
-3) Verificar si algún presidente realizó más de 4 acciones de gobierno en su mandato.
-4) Hacer que todas las promesas incumplidas de un presidente se cumplan
-5) Crear y registrar una denuncia a un presidente
-6) Representar que se descubre que una denuncia hecha aparentemente por un periodista, en realidad fue hecha por un político opositor.
+
+1. Calcular la imagen positiva de un presidente.
+2. Encontrar el presidente con mayor imagen positiva de la historia del país.
+3. Verificar si algún presidente realizó más de 4 acciones de gobierno en su mandato.
+4. Hacer que todas las promesas incumplidas de un presidente se cumplan
+5. Crear y registrar una denuncia a un presidente
+6. Representar que se descubre que una denuncia hecha aparentemente por un periodista, en realidad fue hecha por un político opositor.
  
 Realizar al menos dos tests del punto 1), contemplando situaciones significativas.
+
 Implementar todo el código necesario para los puntos pedidos, no necesariamente para probar todas las funcionalidades.
+
 Justificar conceptualmente:
+
 * ¿Cómo impacta en la solución que las denuncias también las pueda hacer un sindicalista?
 * ¿En qué caso fue útil la herencia?
