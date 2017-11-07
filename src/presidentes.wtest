@@ -1,6 +1,54 @@
+import presidentes.*
 
-test "testX" {
+describe "test del parcial"{ 
+	
+	var periodista= new Periodista()
+	var obra = new Obra (10,10,10)
+	var discurso = new Discurso(10,10,10)
+	var promesa = new Promesa(10,10,10,true)
+	var promesaFalsa = new Promesa(10,10,10,false)
+	var denuncia = new Denuncia(10,10,periodista)
+	var presidente1 =new Presidente(10,[discurso,promesa,discurso,promesa])
+	var presidente2 = new Presidente(5,[discurso,promesa])
+	var presidente3 = new Presidente(8,[promesaFalsa,denuncia,obra])
 
-	assert.that(true)
-
+	fixture{
+		pais.agregarPresidente(presidente1)	
+		pais.agregarPresidente(presidente2)	
+	}
+	
+	test "La imagen positiva de un presidente es la suma de sus actos mas un porcuental de vida( en este caso 6600)" {
+		assert.equals(6600,presidente1.imagenPositiva())
+	}
+	test "La imagen positiva de un presidente es la suma de sus actos mas un porcuental de vida(en este caso 3150)" {
+	
+		assert.equals(3150,presidente2.imagenPositiva())
+	
+	}
+	test "si algun presidente realizo mas de 4 acciones de gobierno en su mandato."{
+		assert.that((pais.presidenteMasdeCuatroActos()))
+	}
+	test "Un presidente recibe una denuncia de un periodista"{
+		presidente1.agregarActo(
+			new Denuncia(100,10,new Periodista()))
+		assert.equals(61600,presidente1.imagenPositiva())
+		
+	}
+	test "Se modifica el denunciante de una denuncia"{
+		var denunciaTrucha = new Denuncia(100,10,new Periodista())
+		presidente1.agregarActo(denunciaTrucha)
+		denunciaTrucha.denunciante(new Politico(40))
+		assert.equals(50600,presidente1.imagenPositiva())
+	}
+	test "se busca el presidente con mas impacto y en este caso es el numero 1 (con 6600)"{
+		assert.equals(6600,pais.mejorImagenPositiva())
+	}
+	test "Un candidato cumple todas sus promesas"{
+		presidente1.cumplirPromesas()
+		assert.that(presidente1.todasPromesasCumplidas())
+	}
+	test "Un presidente no manda a cumplir todas sus promesas y le quedan promesas sin cumplir"{
+		assert.notThat(presidente3.todasPromesasCumplidas())
+	}
+	
 }
