@@ -1,5 +1,8 @@
 # Presidentes argentinos
  
+[![Build Status](https://travis-ci.org/wollok/EjercicioIntegradorPresidentesArgentinos.svg?branch=master)](https://travis-ci.org/wollok/EjercicioIntegradorPresidentesArgentinos)
+
+ 
 *Se quiere analizar la imagen positiva de los diferentes presidentes que tuvo el país a lo largo de la historia.*
  
 La imagen positiva de cada presidente se calcula como la sumatoria del impacto que genera en la población cada uno de sus actos de gobierno que realizó durante su mandato.
