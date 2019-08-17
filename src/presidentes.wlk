@@ -18,10 +18,6 @@ class Presidente {
 	var tiempoDeMuerte
 	var actos= []
 	
-	constructor (tiempo,acto){
-		tiempoDeMuerte = tiempo
-		actos = acto
-	}
 	method agregarActo(acto){
 		actos.add(acto)
 	}
@@ -37,18 +33,15 @@ class Presidente {
 	}
 	
 	method cantidadActos() = actos.size()
+	
 	method todasPromesasCumplidas()
 		= actos.all{a => a.cumplida()}
-	
-		
 }
+
 class Acto {
 	var personas
 	var importancia
-	constructor(_personas,_importancia){
-		personas = _personas
-		importancia = _importancia
-	}
+	
 	method impacto()
 		= personas*importancia
 
@@ -65,32 +58,23 @@ class Acto {
 class Obra inherits Acto{
 	var porcentual
 	
-	constructor(personasAfectadas,importancia,_porcentual) 
-		= super(personasAfectadas,importancia){
-			porcentual  = _porcentual
-	}
+	
 	override method impacto() 
 		= super() * (porcentual/100 + 1)
 //	override method coeficienteImpacto() = (porcentual/100 + 1) 
 }
 
 class Discurso inherits Acto {
-	var intesidad
+	var intensidad
 	
-	constructor(personasAfectadas,importancia,_intesidad) 
-		= super(personasAfectadas,importancia){
-			intesidad = _intesidad
-	}
+	
 	override method impacto() 
-		= super() * intesidad
+		= super() * intensidad
 //	override method coeficienteImpacto() = intensidad 
 }
 class Promesa inherits Discurso {
 	var cumplida
-	constructor(personasAfectadas,importancia,intesidad,_cumplida)
-		= super(personasAfectadas,importancia,intesidad){
-			cumplida = _cumplida
-	}
+	
 	override method impacto()
 		= super() * if (cumplida) 2 else -2
 
@@ -101,12 +85,7 @@ class Promesa inherits Discurso {
 	
 }
 class Denuncia inherits Acto{
-	var denunciante
-	constructor(personas,importancia,_denunciante) 
-		= super(personas,importancia){
-		denunciante = _denunciante
-	}
-	method denunciante(_denunciante) {denunciante = _denunciante}
+	var property denunciante
 	
 	override method impacto()
 		= super() * denunciante.importancia(personas)
@@ -116,9 +95,7 @@ class Denuncia inherits Acto{
 
 class Politico {
 	var seguidores
-	constructor (_seguidores){
-		seguidores = _seguidores
-	}
+	
 	method importancia(audiencia)
 		= seguidores.min(audiencia)
 }

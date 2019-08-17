@@ -3,14 +3,14 @@ import presidentes.*
 describe "test del parcial"{ 
 	
 	var periodista= new Periodista()
-	var obra = new Obra (10,10,10)
-	var discurso = new Discurso(10,10,10)
-	var promesa = new Promesa(10,10,10,true)
-	var promesaFalsa = new Promesa(10,10,10,false)
-	var denuncia = new Denuncia(10,10,periodista)
-	var presidente1 =new Presidente(10,[discurso,promesa,discurso,promesa])
-	var presidente2 = new Presidente(5,[discurso,promesa])
-	var presidente3 = new Presidente(8,[promesaFalsa,denuncia,obra])
+	var obra = new Obra(porcentual = 10, personas = 10, importancia = 10)
+	var discurso = new Discurso(intensidad = 10, personas = 10, importancia = 10)
+	var promesa = new Promesa(intensidad=10,personas = 10, importancia = 10,cumplida = true)
+	var promesaFalsa = new Promesa(intensidad=10,personas = 10, importancia = 10,cumplida = false)
+	var denuncia = new Denuncia(personas = 10, importancia = 10,denunciante = periodista)
+	var presidente1 =new Presidente(tiempoDeMuerte = 10,actos=[discurso,promesa,discurso,promesa])
+	var presidente2 = new Presidente(tiempoDeMuerte = 5,actos=[discurso,promesa])
+	var presidente3 = new Presidente(tiempoDeMuerte = 8,actos=[promesaFalsa,denuncia,obra])
 
 	fixture{
 		pais.agregarPresidente(presidente1)	
@@ -30,14 +30,14 @@ describe "test del parcial"{
 	}
 	test "Un presidente recibe una denuncia de un periodista"{
 		presidente1.agregarActo(
-			new Denuncia(100,10,new Periodista()))
+			new Denuncia(personas = 100, importancia = 10,denunciante = new Periodista()))
 		assert.equals(61600,presidente1.imagenPositiva())
 		
 	}
 	test "Se modifica el denunciante de una denuncia"{
-		var denunciaTrucha = new Denuncia(100,10,new Periodista())
+		var denunciaTrucha = new Denuncia(personas = 100, importancia = 10,denunciante = new Periodista())
 		presidente1.agregarActo(denunciaTrucha)
-		denunciaTrucha.denunciante(new Politico(40))
+		denunciaTrucha.denunciante(new Politico(seguidores = 40))
 		assert.equals(50600,presidente1.imagenPositiva())
 	}
 	test "se busca el presidente con mas impacto y en este caso es el numero 1 (con 6600)"{
