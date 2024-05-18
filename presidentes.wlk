@@ -1,108 +1,97 @@
-object pais{
-	var presidentes= []
+object pais {
+	const presidentes = []
 	
-	method mejorImagenPositiva() 
-		= self.presidenteMejorImagen().imagenPositiva()
-
-	method presidenteMejorImagen()
-		= presidentes.max{presi => presi.imagenPositiva()}
+	method mejorImagenPositiva() = self.presidenteMejorImagen().imagenPositiva()
 	
-	method presidenteMasdeCuatroActos()
-		= presidentes.any{p=> (p.cantidadActos() >=4)}
-
-	method agregarPresidente(presidente){
+	method presidenteMejorImagen() = presidentes.max(
+		{ presidente => presidente.imagenPositiva() }
+	)
+	
+	method presidenteMasdeCuatroActos() = presidentes.any(
+		{ presidente => presidente.cantidadActos() >= 4 }
+	)
+	
+	method agregarPresidente(presidente) {
 		presidentes.add(presidente)
 	}
 }
+
 class Presidente {
-	var tiempoDeMuerte
-	var actos= []
+	const tiempoDeMuerte
+	const actos = []
 	
-	method agregarActo(acto){
+	method agregarActo(acto) {
 		actos.add(acto)
 	}
 	
-	method imagenPositiva() 
-		= actos.sum{a=> a.impacto()} * self.porcentajeMuerte()
+	method imagenPositiva() = actos.sum(
+		{ acto => acto.impacto() }
+	) * self.porcentajeMuerte()
 	
-	method porcentajeMuerte()
-		= 1 + (tiempoDeMuerte /100)
+	method porcentajeMuerte() = 1 + (tiempoDeMuerte / 100)
 	
-	method cumplirPromesas(){
-		 actos.forEach({a=> a.cumplir() })
+	method cumplirPromesas() {
+		actos.forEach({ acto => acto.cumplir() })
 	}
 	
 	method cantidadActos() = actos.size()
 	
-	method todasPromesasCumplidas()
-		= actos.all{a => a.cumplida()}
+	method todasPromesasCumplidas() = actos.all({ acto => acto.cumplida() })
 }
 
 class Acto {
-	var personas
-	var importancia
+	const personas
+	const importancia
 	
-	method impacto()
-		= personas*importancia
-
-//	method impacto()
-//		= personas*importancia*self.coeficienteImpacto()
+	method impacto() = personas * importancia //	method impacto()
 	
-	method cumplir(){}
+	method cumplir() {
+		
+	}
 	
-	method cumplida() = true
-	
-//	method coeficienteImpacto()
+	method cumplida() = true //	method coeficienteImpacto()
 }
 
-class Obra inherits Acto{
-	var porcentual
+class Obra inherits Acto {
+	const porcentual
 	
-	
-	override method impacto() 
-		= super() * (porcentual/100 + 1)
-//	override method coeficienteImpacto() = (porcentual/100 + 1) 
+	override method impacto() = super() * ((porcentual / 100) + 1)
 }
 
 class Discurso inherits Acto {
-	var intensidad
+	const intensidad
 	
-	
-	override method impacto() 
-		= super() * intensidad
-//	override method coeficienteImpacto() = intensidad 
+	override method impacto() = super() * intensidad
+	//	override method coeficienteImpacto() = intensidad 
 }
+
 class Promesa inherits Discurso {
 	var cumplida
 	
-	override method impacto()
-		= super() * if (cumplida) 2 else -2
-
-//	override method coeficienteImpacto() = if (cumplida) 2 else -2
-
-	override method cumplir() {	cumplida = true	}
-	override method cumplida() = cumplida
+	override method impacto() = super() * if (cumplida) 2
+	                                      else -2
+	                                      	//	override method coeficienteImpacto() = if (cumplida) 2 else -2
 	
+	override method cumplir() {
+		cumplida = true
+	}
+	
+	override method cumplida() = cumplida
 }
-class Denuncia inherits Acto{
+
+class Denuncia inherits Acto {
 	var property denunciante
 	
-	override method impacto()
-		= super() * denunciante.importancia(personas)
-
-//	override method coeficienteImpacto() = denunciante.importancia(personas)
+	override method impacto() = super() * denunciante.importancia(personas)
+	//	override method coeficienteImpacto() = denunciante.importancia(personas)
 }
 
 class Politico {
-	var seguidores
+	const seguidores
 	
-	method importancia(audiencia)
-		= seguidores.min(audiencia)
+	method importancia(audiencia) = seguidores.min(audiencia)
 }
 
 class Periodista {
-	method importancia(personas)
-		 = personas/2
+	method importancia(personas) = personas / 2
 }
-
-

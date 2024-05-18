@@ -1,54 +1,88 @@
 import presidentes.*
 
-describe "test del parcial"{ 
+describe "test del parcial" {
+	const periodista = new Periodista()
+	const obra = new Obra(porcentual = 10, personas = 10, importancia = 10)
+	const discurso = new Discurso(intensidad = 10, personas = 10, importancia = 10)
+	const promesa = new Promesa(
+		intensidad = 10,
+		personas = 10,
+		importancia = 10,
+		cumplida = true
+	)
+	const promesaFalsa = new Promesa(
+		intensidad = 10,
+		personas = 10,
+		importancia = 10,
+		cumplida = false
+	)
+	const denuncia = new Denuncia(
+		personas = 10,
+		importancia = 10,
+		denunciante = periodista
+	)
+	const presidente1 = new Presidente(
+		tiempoDeMuerte = 10,
+		actos = [discurso, promesa, discurso, promesa]
+	)
+	const presidente2 = new Presidente(
+		tiempoDeMuerte = 5,
+		actos = [discurso, promesa]
+	)
+	const presidente3 = new Presidente(
+		tiempoDeMuerte = 8,
+		actos = [promesaFalsa, denuncia, obra]
+	)
 	
-	var periodista= new Periodista()
-	var obra = new Obra(porcentual = 10, personas = 10, importancia = 10)
-	var discurso = new Discurso(intensidad = 10, personas = 10, importancia = 10)
-	var promesa = new Promesa(intensidad=10,personas = 10, importancia = 10,cumplida = true)
-	var promesaFalsa = new Promesa(intensidad=10,personas = 10, importancia = 10,cumplida = false)
-	var denuncia = new Denuncia(personas = 10, importancia = 10,denunciante = periodista)
-	var presidente1 =new Presidente(tiempoDeMuerte = 10,actos=[discurso,promesa,discurso,promesa])
-	var presidente2 = new Presidente(tiempoDeMuerte = 5,actos=[discurso,promesa])
-	var presidente3 = new Presidente(tiempoDeMuerte = 8,actos=[promesaFalsa,denuncia,obra])
-
-	method initialize(){
-		pais.agregarPresidente(presidente1)	
-		pais.agregarPresidente(presidente2)	
+	method initialize() {
+		pais.agregarPresidente(presidente1)
+		pais.agregarPresidente(presidente2)
 	}
 	
 	test "La imagen positiva de un presidente es la suma de sus actos mas un porcuental de vida( en este caso 6600)" {
-		assert.equals(6600,presidente1.imagenPositiva())
+		assert.equals(6600, presidente1.imagenPositiva())
 	}
+	
 	test "La imagen positiva de un presidente es la suma de sus actos mas un porcuental de vida(en este caso 3150)" {
-	
-		assert.equals(3150,presidente2.imagenPositiva())
-	
+		assert.equals(3150, presidente2.imagenPositiva())
 	}
-	test "si algun presidente realizo mas de 4 acciones de gobierno en su mandato."{
-		assert.that((pais.presidenteMasdeCuatroActos()))
+	
+	test "si algun presidente realizo mas de 4 acciones de gobierno en su mandato." {
+		assert.that(pais.presidenteMasdeCuatroActos())
 	}
-	test "Un presidente recibe una denuncia de un periodista"{
+	
+	test "Un presidente recibe una denuncia de un periodista" {
 		presidente1.agregarActo(
-			new Denuncia(personas = 100, importancia = 10,denunciante = new Periodista()))
-		assert.equals(61600,presidente1.imagenPositiva())
-		
+			new Denuncia(
+				personas = 100,
+				importancia = 10,
+				denunciante = new Periodista()
+			)
+		)
+		assert.equals(61600, presidente1.imagenPositiva())
 	}
-	test "Se modifica el denunciante de una denuncia"{
-		var denunciaTrucha = new Denuncia(personas = 100, importancia = 10,denunciante = new Periodista())
+	
+	test "Se modifica el denunciante de una denuncia" {
+		const denunciaTrucha = new Denuncia(
+			personas = 100,
+			importancia = 10,
+			denunciante = new Periodista()
+		)
 		presidente1.agregarActo(denunciaTrucha)
 		denunciaTrucha.denunciante(new Politico(seguidores = 40))
-		assert.equals(50600,presidente1.imagenPositiva())
+		assert.equals(50600, presidente1.imagenPositiva())
 	}
-	test "se busca el presidente con mas impacto y en este caso es el numero 1 (con 6600)"{
-		assert.equals(6600,pais.mejorImagenPositiva())
+	
+	test "se busca el presidente con mas impacto y en este caso es el numero 1 (con 6600)" {
+		assert.equals(6600, pais.mejorImagenPositiva())
 	}
-	test "Un candidato cumple todas sus promesas"{
+	
+	test "Un candidato cumple todas sus promesas" {
 		presidente1.cumplirPromesas()
 		assert.that(presidente1.todasPromesasCumplidas())
 	}
-	test "Un presidente no manda a cumplir todas sus promesas y le quedan promesas sin cumplir"{
+	
+	test "Un presidente no manda a cumplir todas sus promesas y le quedan promesas sin cumplir" {
 		assert.notThat(presidente3.todasPromesasCumplidas())
 	}
-	
 }
