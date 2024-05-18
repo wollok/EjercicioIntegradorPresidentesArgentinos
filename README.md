@@ -1,6 +1,6 @@
 # Presidentes argentinos
  
-[![Build Status](https://travis-ci.org/wollok/EjercicioIntegradorPresidentesArgentinos.svg?branch=master)](https://travis-ci.org/wollok/EjercicioIntegradorPresidentesArgentinos)
+[![Build Status](https://github.com/wollok/EjercicioIntegradorPresidentesArgentinos/actions/workflows/ci.yml/badge.svg)](https://github.com/wollok/EjercicioIntegradorPresidentesArgentinos/actions/workflows/ci.yml)
 
  
 *Se quiere analizar la imagen positiva de los diferentes presidentes que tuvo el país a lo largo de la historia.*
